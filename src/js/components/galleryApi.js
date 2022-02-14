@@ -1,7 +1,3 @@
-import InfiniteScroll from 'infinite-scroll';
-
-import Notiflix from 'notiflix';
-
 const axios = require('axios');
 const BAZE_URL = 'https://pixabay.com/api/';
 const API_KEY = '25658613-98e642d2c9015137af6c2464f';
@@ -41,5 +37,3 @@ export default class GalleryApiService {
     this.page = 1;
   }
 }
-
-// [webformatURL, largeImageURL, tags, likes, views, comments, downloads],
