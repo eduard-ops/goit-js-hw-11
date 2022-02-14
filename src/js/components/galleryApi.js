@@ -6,15 +6,16 @@ export default class GalleryApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.per_page = 40;
   }
   async fetchGallery() {
     // console.log(this);
     const url = await axios.get(
-      `${BAZE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`,
+      `${BAZE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=${this.per_page}&page=${this.page}`,
     );
     const data = await url;
     if (!data.data.hits.length) {
-      throw new Error(hits.status);
+      throw new Error(data.data.hits.status);
     }
     this.incrementPage();
 

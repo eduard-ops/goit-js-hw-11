@@ -47,18 +47,28 @@ async function onClickSubmit(e) {
 }
 
 async function onLoadMore() {
-  refs.brtMore.classList.remove('.btn__load-more:hover');
-  const urlObj = await galleryApiService.fetchGallery();
-  const {
-    data: { hits },
-  } = urlObj;
-  appendHitsMarkup(hits);
-  lightbox.refresh();
-  const { height: cardHeight } = refs.divGallery.firstElementChild.getBoundingClientRect();
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-  });
+  try {
+    const urlObj = await galleryApiService.fetchGallery();
+    const {
+      data: { hits },
+    } = urlObj;
+    appendHitsMarkup(hits);
+    lightbox.refresh();
+    const { height: cardHeight } = refs.divGallery.firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+
+    if (galleryApiService.page > urlObj.data.totalHits / galleryApiService.per_page) {
+      refs.brtMore.classList.add('is-hidden');
+      return Notiflix.Notify.success('Your search has come to an end');
+    }
+  } catch (error) {
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.',
+    );
+  }
 }
 
 function appendHitsMarkup(hits) {
