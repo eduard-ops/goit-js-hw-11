@@ -17,10 +17,10 @@ const refs = {
 
 refs.brtMore.classList.add('is-hidden');
 
-const galleryApiService = new GalleryApiService();
-
 refs.formEl.addEventListener('submit', onClickSubmit);
 refs.brtMore.addEventListener('click', onLoadMore);
+
+const galleryApiService = new GalleryApiService();
 
 async function onClickSubmit(e) {
   e.preventDefault();
@@ -47,6 +47,7 @@ async function onClickSubmit(e) {
 }
 
 async function onLoadMore() {
+  refs.brtMore.classList.remove('.btn__load-more:hover');
   const urlObj = await galleryApiService.fetchGallery();
   const {
     data: { hits },
