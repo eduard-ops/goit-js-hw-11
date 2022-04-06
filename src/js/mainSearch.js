@@ -25,7 +25,7 @@ refs.animLoad.classList.add('is-hidden');
 async function onClickSubmit(e) {
   e.preventDefault();
   clearHitsContainer();
-  galleryApiService.query = e.currentTarget.elements.searchQuery.value;
+  galleryApiService.query = e.currentTarget.elements.searchQuery.value.trim();
   if (galleryApiService.query === '') {
     Notiflix.Notify.info('Please enter something');
     refs.animLoad.classList.add('is-hidden');

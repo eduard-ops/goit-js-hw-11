@@ -23,7 +23,7 @@ export default class GalleryApiService {
       throw new Error(data.data.hits.status);
     }
     this.incrementPage();
-
+    console.log(data);
     return data;
   }
 
